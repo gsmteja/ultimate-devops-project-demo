@@ -97,11 +97,14 @@ jobs:
         
         - name: Commit and push changes
           run: |
-                git config --global user.email "gsmteja21@yahoo.com"
-                git config --global user.name "gsmteja"
-                git add kubernetes/productcatalog/deploy.yaml
-                git commit -m "[CI]: Update product catalog image tag" || echo "No changes to commit"
-                git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/gsmteja/ultimate-devops-project-demo.git HEAD:main        
+
+              git config --global user.email "gsmteja21@yahoo.com"
+              git config --global user.name "gsmteja"
+              git add kubernetes/productcatalog/deploy.yaml
+              git commit -m "[CI]: Update product catalog image tag" || echo "No changes to commit"
+              git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} main
+              git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main
+      
         
           
 
